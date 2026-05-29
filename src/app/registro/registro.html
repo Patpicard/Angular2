@@ -1,0 +1,44 @@
+<h1 [ngStyle]="{'color': formulario.valid ? 'green' : 'black'}">
+  Formulario de Registro
+</h1>
+<p>Completa tus datos para continuar.</p>
+
+<form [formGroup]="formulario" (ngSubmit)="enviar()">
+  <!-- Campo Nombre -->
+  <div>
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre" 
+           [ngClass]="{'campo-invalido': formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched}">
+    
+    <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+      <small *ngFor="let error of ['El nombre es obligatorio y requiere al menos 3 caracteres']">
+        {{ error }}
+      </small>
+    </div>
+  </div>
+
+  <!-- Campo Email -->
+  <div>
+    <label>Email:</label>
+    <input type="email" formControlName="email" 
+           [ngClass]="{'campo-invalido': formulario.get('email')?.invalid && formulario.get('email')?.touched}">
+    
+    <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+      <small *ngFor="let error of ['Ingrese un formato de email válido']">
+        {{ error }}
+      </small>
+    </div>
+  </div>
+
+  <!-- Campo Mensaje -->
+  <div>
+    <label>Mensaje (opcional):</label>
+    <textarea formControlName="mensaje"></textarea>
+  </div>
+
+  <!-- Botón de envío -->
+  <button type="submit" [disabled]="formulario.invalid">Enviar</button>
+</form>
+
+<!-- Mensaje de éxito final -->
+<p *ngIf="enviado">Formulario enviado</p>
