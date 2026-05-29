@@ -27,7 +27,24 @@ export class RegistroComponent {
       mensaje: ['']
     });
   }
+ // a ver est de  la lista de errores para el *ngFor
+  obtenerErroresNombre(): string[] {
+    const errores: string[] = [];
+    const control = this.formulario.get('nombre');
+    if (control?.errors?.['required']) errores.push('El nombre es obligatorio.');
+    if (control?.errors?.['minlength']) errores.push('Debe tener al menos 3 caracteres.');
+    return errores;
+  }
 
+  obtenerErroresEmail(): string[] {
+    const errores: string[] = [];
+    const control = this.formulario.get('email');
+    if (control?.errors?.['required']) errores.push('El email es obligatorio.');
+    if (control?.errors?.['email']) errores.push('El formato de email no es válido.');
+    return errores;
+  }
+
+  
   enviar() {
     if (this.formulario.valid) {
       console.log(this.formulario.value);

@@ -11,10 +11,13 @@
            [ngClass]="{'campo-invalido': formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched}">
     
     <div *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
-      <small *ngFor="let error of ['El nombre es obligatorio y requiere al menos 3 caracteres']">
-        {{ error }}
-      </small>
-    </div>
+
+      <small *ngFor="let error of obtenerErroresNombre()">
+    {{ error }}
+  </small>
+    </div> 
+
+
   </div>
 
   <!-- Campo Email -->
@@ -24,9 +27,9 @@
            [ngClass]="{'campo-invalido': formulario.get('email')?.invalid && formulario.get('email')?.touched}">
     
     <div *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
-      <small *ngFor="let error of ['Ingrese un formato de email válido']">
-        {{ error }}
-      </small>
+    <small *ngFor="let error of obtenerErroresEmail()">
+    {{ error }}
+  </small>
     </div>
   </div>
 
