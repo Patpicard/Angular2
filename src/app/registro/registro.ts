@@ -32,7 +32,8 @@ export class RegistroComponent {
     const errores: string[] = [];
     const control = this.formulario.get('nombre');
     if (control?.errors?.['required']) errores.push('El nombre es obligatorio.');
-    if (control?.errors?.['minlength']) errores.push('Debe tener al menos 3 caracteres.');
+    control?.errors?.['minlength'].errorMinLength
+    if (control?.errors?.['minlength']) errores.push('Debe tener al menos ' +String((control.errors['minlength'] as any).requiredLength )+ ' caracteres.');
     return errores;
   }
 
